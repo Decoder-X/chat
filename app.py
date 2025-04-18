@@ -34,4 +34,6 @@ def disconnect():
     print(f"{nickname} disconnected.")
 
 if __name__ == '__main__':
-    socketio.run(app, host="0.0.0.0", port="5000", debug=True)
+    import eventlet
+    eventlet.monkey_patch()
+    socketio.run(app, host='0.0.0.0', port=10000)
