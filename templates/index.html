@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anonymous Chat</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="chat-box"></div>
+    <input id="msg" placeholder="Type a message..." autocomplete="off">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        var socket = io();
+
+        socket.on('message', function(msg){
+            let box = document.getElementById('chat-box');
+            box.innerHTML += `<p>${msg}</p>`;
+            box.scrollTop = box.scrollHeight;
+        });
+
+        function sendMessage() {
+            let msg = document.getElementById('msg').value;
+            socket.send(msg);
+            document.getElementById('msg').value = '';
+        }
+    </script>
+</body>
+</html>
