@@ -1,10 +1,21 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, send
 import random
+import re
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
+
+# List of bad words to filter
+BAD_WORDS = ['badword1', 'badword2', 'examplebadword']  # Add your words here
+
+# Function to filter bad words
+def filter_bad_words(message):
+    # Replace each bad word with asterisks
+    for word in BAD_WORDS:
+        message = re.sub(r'\b' + re.escape(word) + r'\b', '*' * len(word), message, flags=re.IGNORECASE)
+    return message
 
 nicknames = {}
 
@@ -14,12 +25,21 @@ def index():
 
 chat_history = []
 
+
 @socketio.on('message')
 def handle_message(msg):
-    nickname = nicknames.get(str(request.sid), "Unknown")
-    full_msg = f"{nickname}: {msg}"
+    clean_msg = filter_bad_words(msg)
+    sender_id = request.sid
+    nickname = nicknames.get(sender_id, "Unknown")
+    full_msg = {
+        'text': f"{nickname}: {clean_msg}",
+        'sender': sender_id
+    }
     chat_history.append(full_msg)
     send(full_msg, broadcast=True)
+
+
+
 
 @socketio.on('connect')
 def connect(auth):
