@@ -8,7 +8,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 # List of bad words to filter
-BAD_WORDS = ['anal', 'fuck', 'fucker', 'fu*ker', 'assfucker', 'assholes', 'asshole', 'asswhole', 'b!tch', 'b00bs', 'bastard', 'bi+ch', 'bitch', 'bitcher', 'booooooobs', 'mother', 'father', 'motherfucker', 'kill', 'k!ll', 'fuckyou!', 'fuckyou', 'killyou', 'dick', 'd!ck', 'f u c k', 'f u c k e r', 'fucking', 'fuckin', 'fuckhead', 'fuckers', 'hell', 'f_u_c_k', 'mothafuckers', 'sex', 'sexy', 'xxx', 'son-of-a-bitch', 'sonofabitch','vagina']  # Add your words here
+BAD_WORDS = ['anal','baincod','behenchod','motherchod','matarchod','khanki' ,'bukachoda','bokaaachoda','bokachoda','sala','voda','magi','fuck', 'fucker', 'fu*ker', 'assfucker', 'assholes', 'asshole', 'asswhole', 'b!tch', 'b00bs', 'bastard', 'bi+ch', 'bitch', 'bitcher', 'booooooobs', 'mother', 'father', 'motherfucker', 'kill', 'k!ll', 'fuckyou!', 'fuckyou', 'killyou', 'dick', 'd!ck', 'f u c k', 'f u c k e r', 'fucking', 'fuckin', 'fuckhead', 'fuckers', 'hell', 'f_u_c_k', 'mothafuckers', 'sex', 'sexy', 'xxx', 'son-of-a-bitch', 'sonofabitch','vagina']  # Add your words here
 
 # Function to filter bad words
 def filter_bad_words(message):
